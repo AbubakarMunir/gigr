@@ -14,7 +14,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.finconnect.ui.login.InitLoginScreen
 import com.example.finconnect.ui.theme.FinConnectTheme
+
+
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,13 +25,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             FinConnectTheme {
-                /*Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Abu",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }*/
-                TestComposeScreen()
+                InitLoginScreen()
             }
         }
     }
@@ -54,16 +51,16 @@ fun TestComposeScreen() {
         )
     }
 }
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    FinConnectTheme {
-        Greeting("Android")
-    }
-}
+
+
+//@Preview(showBackground = true)
+//@Composable
+//fun PreviewTestComposeScreen() {
+//    TestComposeScreen()
+//}
 
 @Preview(showBackground = true)
 @Composable
-fun PreviewTestComposeScreen() {
-    TestComposeScreen()
+fun InitLoginScreenPreview() {
+    InitLoginScreen()
 }
