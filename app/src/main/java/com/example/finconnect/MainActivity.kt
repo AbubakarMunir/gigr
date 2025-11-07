@@ -40,18 +40,6 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
     )
 }
 
-@Composable
-fun TestComposeScreen() {
-    Box(
-        modifier = Modifier.fillMaxSize(),
-        contentAlignment = Alignment.Center
-    ) {
-        Text(
-            text = "Jetpack Compose is working ✅",
-            color = Color.Green
-        )
-    }
-}
 
 
 @Preview(showBackground = true)
