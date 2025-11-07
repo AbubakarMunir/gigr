@@ -16,12 +16,15 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.finconnect.R
 import com.example.finconnect.ui.common.AppButton
+import com.example.finconnect.ui.navigation.AppRoutes
 import com.example.finconnect.ui.theme.FinConnectTheme
 
 @Composable
-fun InitLaunchScreen() {
+fun InitLaunchScreen(navController: NavController) {
     Box(modifier = Modifier.fillMaxSize()) {
          Image(
              painter = painterResource(id = R.drawable.launchbg),
@@ -39,7 +42,7 @@ fun InitLaunchScreen() {
         ) {
             AppButton(
                 text = "Login",
-                onClick = { /*  */ },
+                onClick = { navController.navigate(AppRoutes.LOGIN) },
                 containerColor = Color.Green
             )
             Spacer(modifier = Modifier.height(8.dp))
