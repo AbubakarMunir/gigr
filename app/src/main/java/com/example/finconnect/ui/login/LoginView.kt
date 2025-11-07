@@ -10,19 +10,18 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import androidx.compose.runtime.*
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 
 @Composable
 fun InitLoginScreen() {
@@ -35,34 +34,50 @@ fun InitLoginScreen() {
         verticalArrangement = Arrangement.Center,  // Center children vertically
         horizontalAlignment = Alignment.CenterHorizontally // Center horizontally
     ) {
-        Text("Hello")
-        Text("World")
-        OutlinedTextField(
-            value = username,
-            onValueChange = { username=it},
-            label = { Text("Username") },
-            singleLine = true,
-            modifier = Modifier
-                .padding(vertical = 8.dp)
+        LoginTextField(
+            value = username, onValueChange = { username = it }, label = "Username"
         )
-        OutlinedTextField(
-            value = password,
-            onValueChange = { password=it},
-            label = { Text("Password") },
-            singleLine = true,
-            visualTransformation = PasswordVisualTransformation(),
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
-            modifier = Modifier
-                .padding(vertical = 8.dp)
+        LoginTextField(
+            value = password, onValueChange = { password = it }, label = "Password", isPassword = true
         )
-        Button(
-            onClick = {},
-            colors = ButtonDefaults.buttonColors(
-                containerColor = Color.Green,  // Button background
-                contentColor = Color.White    // Text color
-            )
-        ) {
-            Text("Login")
-        }
+        LoginButton(onClick = {})
     }
+}
+
+@Composable
+private fun LoginTextField(
+    value: String,
+    onValueChange: (String) -> Unit,
+    label: String,
+    isPassword: Boolean = false
+) {
+    OutlinedTextField(
+        value = value,
+        onValueChange = onValueChange,
+        label = { Text(label) },
+        singleLine = true,
+        visualTransformation = if (isPassword) PasswordVisualTransformation() else VisualTransformation.None,
+        keyboardOptions = if (isPassword) KeyboardOptions(keyboardType = KeyboardType.Password) else KeyboardOptions.Default,
+        modifier = Modifier
+            .padding(vertical = 12.dp)
+    )
+}
+
+@Composable
+private fun LoginButton(onClick: () -> Unit) {
+    Button(
+        onClick = onClick,
+        colors = ButtonDefaults.buttonColors(
+            containerColor = Color.Green,  // Button background
+            contentColor = Color.White    // Text color
+        )
+    ) {
+        Text("Login")
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun InitLoginScreenPreview() {
+    InitLoginScreen()
 }
