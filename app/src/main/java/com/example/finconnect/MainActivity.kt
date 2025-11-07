@@ -14,6 +14,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.finconnect.ui.launch.InitLaunchScreen
 import com.example.finconnect.ui.login.InitLoginScreen
 import com.example.finconnect.ui.theme.FinConnectTheme
 
@@ -25,7 +26,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             FinConnectTheme {
-                InitLoginScreen()
+                InitLaunchScreen()
             }
         }
     }
@@ -53,14 +54,8 @@ fun TestComposeScreen() {
 }
 
 
-//@Preview(showBackground = true)
-//@Composable
-//fun PreviewTestComposeScreen() {
-//    TestComposeScreen()
-//}
-
 @Preview(showBackground = true)
 @Composable
-fun InitLoginScreenPreview() {
-    InitLoginScreen()
+fun PreviewTestComposeScreen() {
+    InitLaunchScreen()
 }
