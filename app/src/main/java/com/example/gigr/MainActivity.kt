@@ -5,14 +5,13 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import com.example.gigr.ui.navigation.AppNavigation
-import com.example.gigr.ui.theme.FinConnectTheme
-
+import com.example.gigr.ui.theme.gigrTheme
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            FinConnectTheme {
+            gigrTheme {
                 AppNavigation()
             }
         }

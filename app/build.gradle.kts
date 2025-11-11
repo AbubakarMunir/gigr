@@ -11,7 +11,7 @@ android {
     }
 
     defaultConfig {
-        applicationId = "com.example.finconnect"
+        applicationId = "com.example.gigr"
         minSdk = 24
         targetSdk = 36
         versionCode = 1
