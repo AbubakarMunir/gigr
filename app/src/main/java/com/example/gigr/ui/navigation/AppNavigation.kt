@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.gigr.ui.addrecord.AddRecordScreen
 import com.example.gigr.ui.launch.InitLaunchScreen
 import com.example.gigr.ui.login.InitLoginScreen
 import com.example.gigr.ui.signup.InitSignUpScreen
@@ -14,6 +15,7 @@ object AppRoutes {
     const val LOGIN = "login"
     const val SIGNUP = "signup"
     const val WELCOME = "welcome"
+    const val ADD_RECORD = "add_record"
 }
 
 @Composable
@@ -32,7 +34,11 @@ fun AppNavigation() {
         }
 
         composable(AppRoutes.WELCOME) {
-            WelcomeScreen()
+            WelcomeScreen(navController = navController)
+        }
+
+        composable(AppRoutes.ADD_RECORD) {
+            AddRecordScreen(navController = navController)
         }
     }
 }
