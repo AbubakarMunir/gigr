@@ -1,5 +1,6 @@
 package com.example.gigr.ui.login
 
+import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -12,11 +13,13 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
@@ -25,7 +28,10 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.example.gigr.ui.navigation.AppRoutes
+import com.example.gigr.viewmodels.LoginEvent
 import com.example.gigr.viewmodels.LoginViewModel
+import kotlinx.coroutines.flow.collectLatest
 
 @Composable
 fun InitLoginScreen(navController: NavController, loginViewModel: LoginViewModel = viewModel()) {
@@ -33,6 +39,19 @@ fun InitLoginScreen(navController: NavController, loginViewModel: LoginViewModel
     val password by loginViewModel.password.collectAsState()
     val isLoading by loginViewModel.isLoading.collectAsState()
     val error by loginViewModel.error.collectAsState()
+
+    val context = LocalContext.current
+
+    LaunchedEffect(key1 = true) {
+        loginViewModel.eventFlow.collectLatest { event ->
+            when (event) {
+                is LoginEvent.NavigateToWelcome -> {
+                    Toast.makeText(context, "Login successful!", Toast.LENGTH_SHORT).show()
+                    navController.navigate(AppRoutes.WELCOME)
+                }
+            }
+        }
+    }
 
     Box(modifier = Modifier.fillMaxSize()) {
         Column(

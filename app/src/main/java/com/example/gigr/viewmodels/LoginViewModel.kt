@@ -3,9 +3,15 @@ package com.example.gigr.viewmodels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.gigr.data.repository.AuthRepository
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+
+sealed class LoginEvent {
+    object NavigateToWelcome : LoginEvent()
+}
 
 class LoginViewModel : ViewModel() {
 
@@ -23,6 +29,9 @@ class LoginViewModel : ViewModel() {
     private val _error = MutableStateFlow<String?>(null)
     val error = _error.asStateFlow()
 
+    private val _eventFlow = MutableSharedFlow<LoginEvent>()
+    val eventFlow = _eventFlow.asSharedFlow()
+
     fun onEmailChange(email: String) {
         _email.value = email
     }
@@ -37,10 +46,9 @@ class LoginViewModel : ViewModel() {
 
         viewModelScope.launch {
             try {
-                // This function doesn't exist yet, we will add it next.
                 authRepository.signIn(email.value, password.value)
-                // TODO: Handle success navigation
                 _isLoading.value = false
+                _eventFlow.emit(LoginEvent.NavigateToWelcome)
             } catch (e: Exception) {
                 _error.value = e.message
                 _isLoading.value = false
