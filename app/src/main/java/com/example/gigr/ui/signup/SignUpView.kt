@@ -6,11 +6,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -20,14 +16,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.input.PasswordVisualTransformation
-import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.example.gigr.ui.AppButton
+import com.example.gigr.ui.AppTextField
 import com.example.gigr.ui.navigation.AppRoutes
 import com.example.gigr.viewmodels.SignUpEvent
 import com.example.gigr.viewmodels.SignUpViewModel
@@ -63,20 +58,20 @@ fun InitSignUpScreen(navController: NavController, signUpViewModel: SignUpViewMo
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            SignUpTextField(
+            AppTextField(
                 value = email,
                 onValueChange = { signUpViewModel.onEmailChange(it) },
                 label = "Email",
                 enabled = !isLoading
             )
-            SignUpTextField(
+            AppTextField(
                 value = password,
                 onValueChange = { signUpViewModel.onPasswordChange(it) },
                 label = "Password",
                 isPassword = true,
                 enabled = !isLoading
             )
-            SignUpTextField(
+            AppTextField(
                 value = confirmPassword,
                 onValueChange = { signUpViewModel.onConfirmPasswordChange(it) },
                 label = "Confirm Password",
@@ -93,51 +88,17 @@ fun InitSignUpScreen(navController: NavController, signUpViewModel: SignUpViewMo
                 Text(it, color = Color.Red, modifier = Modifier.padding(top = 4.dp))
             }
 
-            SignUpButton(
+            AppButton(
+                text = "Sign Up",
                 onClick = { signUpViewModel.onSignUpClicked() },
-                enabled = !isLoading
+                containerColor = Color.Blue,
+                enabled = !isLoading,
+                modifier = Modifier.padding(top = 16.dp)
             )
         }
         if (isLoading) {
             CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
         }
-    }
-}
-
-@Composable
-private fun SignUpTextField(
-    value: String,
-    onValueChange: (String) -> Unit,
-    label: String,
-    isPassword: Boolean = false,
-    isError: Boolean = false,
-    enabled: Boolean = true
-) {
-    OutlinedTextField(
-        value = value,
-        onValueChange = onValueChange,
-        label = { Text(label) },
-        singleLine = true,
-        visualTransformation = if (isPassword) PasswordVisualTransformation() else VisualTransformation.None,
-        keyboardOptions = if (isPassword) KeyboardOptions(keyboardType = KeyboardType.Password) else KeyboardOptions.Default,
-        modifier = Modifier.padding(vertical = 8.dp),
-        isError = isError,
-        enabled = enabled
-    )
-}
-
-@Composable
-private fun SignUpButton(onClick: () -> Unit, enabled: Boolean = true) {
-    Button(
-        onClick = onClick,
-        colors = ButtonDefaults.buttonColors(
-            containerColor = Color.Blue,
-            contentColor = Color.White
-        ),
-        modifier = Modifier.padding(top = 16.dp),
-        enabled = enabled
-    ) {
-        Text("Sign Up")
     }
 }
 
