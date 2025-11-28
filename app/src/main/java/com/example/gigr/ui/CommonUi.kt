@@ -21,7 +21,9 @@ fun AppTextField(
     onValueChange: (String) -> Unit,
     label: String,
     isPassword: Boolean = false,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    enabled: Boolean = true,
+    isError: Boolean = false
 ) {
     OutlinedTextField(
         value = value,
@@ -32,7 +34,9 @@ fun AppTextField(
         keyboardOptions = if (isPassword) KeyboardOptions(keyboardType = KeyboardType.Password) else KeyboardOptions.Default,
         modifier = modifier
             .fillMaxWidth()
-            .padding(vertical = 8.dp)
+            .padding(vertical = 8.dp),
+        enabled = enabled,
+        isError = isError
     )
 }
 
@@ -41,7 +45,8 @@ fun AppButton(
     text: String,
     onClick: () -> Unit,
     containerColor: Color,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    enabled: Boolean = true
 ) {
     Button(
         onClick = onClick,
@@ -49,7 +54,8 @@ fun AppButton(
         colors = ButtonDefaults.buttonColors(
             containerColor = containerColor,
             contentColor = Color.White
-        )
+        ),
+        enabled = enabled
     ) {
         Text(text)
     }
