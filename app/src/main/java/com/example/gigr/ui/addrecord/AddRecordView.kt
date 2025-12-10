@@ -31,7 +31,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 import com.example.gigr.viewmodels.AddRecordViewModel
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -45,16 +44,16 @@ fun AddRecordScreen(
     val selectedDate by addRecordViewModel.selectedDate.collectAsState()
 
     AddRecordScreenContent(
-        navController = navController,
-        selectedDate = selectedDate
+        selectedDate = selectedDate,
+        onBackClicked = { navController.popBackStack() }
     )
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AddRecordScreenContent(
-    navController: NavController,
-    selectedDate: Date
+    selectedDate: Date,
+    onBackClicked: () -> Unit
 ) {
     val dateFormat = SimpleDateFormat("dd MMM", Locale.getDefault())
 
@@ -63,7 +62,7 @@ fun AddRecordScreenContent(
             TopAppBar(
                 title = { Text(" Add Record") },
                 navigationIcon = {
-                    IconButton(onClick = { navController.popBackStack() }) {
+                    IconButton(onClick = onBackClicked) {
                         Icon(Icons.Filled.ArrowBack, contentDescription = "Back")
                     }
                 }
@@ -101,7 +100,7 @@ fun AddRecordScreenContent(
 @Composable
 fun AddRecordScreenPreview() {
     AddRecordScreenContent(
-        navController = rememberNavController(),
-        selectedDate = Date()
+        selectedDate = Date(),
+        onBackClicked = {}
     )
 }
