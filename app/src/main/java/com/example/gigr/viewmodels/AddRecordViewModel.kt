@@ -18,6 +18,8 @@ class AddRecordViewModel : ViewModel() {
     }
 
     fun onUberEarningsChange(newEarnings: String) {
-        _uberEarnings.value = newEarnings
+        if (newEarnings.isEmpty() || newEarnings.matches("^\\d*\\.?\\d*$".toRegex())) {
+            _uberEarnings.value = newEarnings
+        }
     }
 }
