@@ -10,7 +10,14 @@ class AddRecordViewModel : ViewModel() {
     private val _selectedDate = MutableStateFlow(Date())
     val selectedDate = _selectedDate.asStateFlow()
 
+    private val _uberEarnings = MutableStateFlow("")
+    val uberEarnings = _uberEarnings.asStateFlow()
+
     fun onDateChange(newDate: Date) {
         _selectedDate.value = newDate
+    }
+
+    fun onUberEarningsChange(newEarnings: String) {
+        _uberEarnings.value = newEarnings
     }
 }
