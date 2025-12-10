@@ -33,7 +33,9 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.gigr.viewmodels.AddRecordViewModel
+import java.text.SimpleDateFormat
 import java.util.Date
+import java.util.Locale
 
 @Composable
 fun AddRecordScreen(
@@ -54,6 +56,8 @@ fun AddRecordScreenContent(
     navController: NavController,
     selectedDate: Date
 ) {
+    val dateFormat = SimpleDateFormat("dd MMM", Locale.getDefault())
+
     Scaffold(
         topBar = {
             TopAppBar(
@@ -86,7 +90,7 @@ fun AddRecordScreenContent(
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Text(text = "19 Apr")
+                Text(text = dateFormat.format(selectedDate))
                 Icon(imageVector = Icons.Default.ArrowDropDown, contentDescription = "Select Date")
             }
         }
