@@ -35,7 +35,9 @@ import java.util.Locale
 @Composable
 fun AddRecordScreenContent(
     selectedDate: Date,
-    onBackClicked: () -> Unit
+    onBackClicked: () -> Unit,
+    uberEarnings: String,
+    onUberEarningsChange: (String) -> Unit
 ) {
     val dateFormat = SimpleDateFormat("dd MMM", Locale.getDefault())
 
@@ -74,7 +76,29 @@ fun AddRecordScreenContent(
                 Text(text = dateFormat.format(selectedDate))
                 Icon(imageVector = Icons.Default.ArrowDropDown, contentDescription = "Select Date")
             }
+            Spacer(modifier = Modifier.height(24.dp))
+            Text(
+                text = "Apps & Earnings",
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold
+            )
+            Spacer(modifier = Modifier.height(8.dp))
+            EarningInputRow(label = "Uber", value = "0.00")
         }
+    }
+}
+
+@Composable
+private fun EarningInputRow(label: String, value: String) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(vertical = 16.dp),
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Text(text = label, fontSize = 16.sp)
+        Text(text = value, fontSize = 16.sp)
     }
 }
 
@@ -83,6 +107,8 @@ fun AddRecordScreenContent(
 fun AddRecordScreenContentPreview() {
     AddRecordScreenContent(
         selectedDate = Date(),
-        onBackClicked = {}
+        onBackClicked = {},
+        uberEarnings = "0.00",
+        onUberEarningsChange = {}
     )
 }
