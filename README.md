@@ -2,8 +2,8 @@
 
 A simple, privacy first app built for gig workers to track their daily earnings, shifts, and workload without connecting to any third-party gig platforms
 
-> 🚧 *Currently in early development — focusing on authentication UI (Login & Signup) using Jetpack Compose.
-> Gigr is being **built from the ground up**, with every piece of architecture from MVVM layers to composables written from scratch.  
+> 🚧 *Currently in early development — completed authentication UI (Login & Signup) and now focusing on Add Record functionality using Jetpack Compose.
+> Architecting the app from the ground up, with MVVM layers, state-driven UI, and composables written from scratch.
 Any AI-generated code (e.g., Gemini-assisted snippets) is **fully reviewed, rewritten where necessary,
 and committed in micro iterations** to maintain clean, human readable code quality and version control
 
