@@ -13,6 +13,9 @@ class AddRecordViewModel : ViewModel() {
     private val _uberEarnings = MutableStateFlow("")
     val uberEarnings = _uberEarnings.asStateFlow()
 
+    private val _totalEarnings = MutableStateFlow("0.00")
+    val totalEarnings = _totalEarnings.asStateFlow()
+
     fun onDateChange(newDate: Date) {
         _selectedDate.value = newDate
     }
@@ -20,6 +23,12 @@ class AddRecordViewModel : ViewModel() {
     fun onUberEarningsChange(newEarnings: String) {
         if (newEarnings.isEmpty() || newEarnings.matches("^\\d*\\.?\\d*$".toRegex())) {
             _uberEarnings.value = newEarnings
+            updateTotal()
         }
+    }
+
+    private fun updateTotal() {
+        val uber = _uberEarnings.value.toDoubleOrNull() ?: 0.0
+        _totalEarnings.value = String.format("%.2f", uber)
     }
 }

@@ -41,7 +41,8 @@ fun AddRecordScreenContent(
     selectedDate: Date,
     onBackClicked: () -> Unit,
     uberEarnings: String,
-    onUberEarningsChange: (String) -> Unit
+    onUberEarningsChange: (String) -> Unit,
+    totalEarnings: String
 ) {
     val dateFormat = SimpleDateFormat("dd MMM", Locale.getDefault())
 
@@ -90,8 +91,20 @@ fun AddRecordScreenContent(
             EarningInputRow(
                 label = "Uber",
                 value = uberEarnings,
-                onValueChange = onUberEarningsChange,
+                onValueChange = onUberEarningsChange
             )
+
+            Spacer(modifier = Modifier.weight(1f))
+
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 16.dp),
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                Text(text = "Total:", fontSize = 20.sp, fontWeight = FontWeight.Bold)
+                Text(text = "$$totalEarnings", fontSize = 20.sp, fontWeight = FontWeight.Bold)
+            }
         }
     }
 }
@@ -113,8 +126,6 @@ private fun EarningInputRow(label: String, value: String, onValueChange: (String
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Decimal),
             singleLine = true
         )
-
-
     }
 }
 
@@ -125,6 +136,7 @@ fun AddRecordScreenContentPreview() {
         selectedDate = Date(),
         onBackClicked = {},
         uberEarnings = "0.00",
-        onUberEarningsChange = {}
+        onUberEarningsChange = {},
+        totalEarnings = "0.00"
     )
 }

@@ -14,11 +14,13 @@ fun AddRecordScreen(
 ) {
     val selectedDate by addRecordViewModel.selectedDate.collectAsState()
     val uberEarnings by addRecordViewModel.uberEarnings.collectAsState()
+    val totalEarnings by addRecordViewModel.totalEarnings.collectAsState()
 
     AddRecordScreenContent(
         selectedDate = selectedDate,
         onBackClicked = { navController.popBackStack() },
         uberEarnings = uberEarnings,
-        onUberEarningsChange = { addRecordViewModel.onUberEarningsChange(it) }
+        onUberEarningsChange = { addRecordViewModel.onUberEarningsChange(it) },
+        totalEarnings = totalEarnings
     )
 }
